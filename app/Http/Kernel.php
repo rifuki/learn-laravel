@@ -29,12 +29,15 @@ class Kernel extends HttpKernel
      * @var array<string, array<int, class-string|string>>
      */
     protected $middlewareGroups = [
+        'groups' => [
+            \App\Http\Middleware\ContohMiddleware::class
+        ],
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\VerifyCsrfToken::class, /* * disable this for post request or chaining method without middleware on the routes */
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -64,5 +67,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'contoh.middleware' => \App\Http\Middleware\ContohMiddleware::class,
+        'contoh.middleware.parameters' => \App\Http\Middleware\ContohMiddlewareParameter::class
     ];
 }
